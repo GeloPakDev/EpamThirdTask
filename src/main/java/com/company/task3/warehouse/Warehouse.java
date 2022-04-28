@@ -20,15 +20,15 @@ public class Warehouse {
         return arrayValuesMap.get(key);
     }
 
-    public ArrayValues put(Integer key, ArrayValues value) {
-        return arrayValuesMap.put(key, value);
+    public void put(Integer key, ArrayValues value) {
+        arrayValuesMap.put(key, value);
     }
 
     public void putAll(Map<? extends Integer, ? extends ArrayValues> m) {
         arrayValuesMap.putAll(m);
     }
 
-    public boolean remove(Integer key, Object value) {
+    public boolean remove(Integer key, ArrayValues value) {
         return arrayValuesMap.remove(key, value);
     }
 }
