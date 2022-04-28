@@ -6,16 +6,18 @@ import com.company.task3.specification.Specification;
 
 public class SizeArraySpecification implements Specification {
 
-    int size;
-    CustomArrayService service;
+    private int from;
+    private int to;
 
-    public SizeArraySpecification(int size) {
-        this.size = size;
-        service = new CustomArrayService();
+    public SizeArraySpecification(int from, int to) {
+        this.from = from;
+        this.to = to;
     }
 
     @Override
     public boolean check(CustomArray array) {
-        return size == service.countElements(array.getArray());
+        CustomArrayService service = new CustomArrayService();
+        int size = service.countElements(array.getArray());
+        return from < size && to > size;
     }
 }

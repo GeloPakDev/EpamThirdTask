@@ -1,7 +1,11 @@
 package com.company.task3.repository.impl;
 
+import com.company.task3.warehouse.Warehouse;
+import com.company.task3.entity.ArrayValues;
 import com.company.task3.entity.CustomArray;
 import com.company.task3.repository.Repository;
+import com.company.task3.service.CustomArrayService;
+import com.company.task3.sorting.SortingService;
 import com.company.task3.specification.Specification;
 
 import java.util.ArrayList;
@@ -9,11 +13,14 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class CustomArrayRepository implements Repository {
-
+    private static final CustomArrayRepository instance = new CustomArrayRepository();
     private List<CustomArray> repository;
 
-    public CustomArrayRepository() {
-        repository = new ArrayList<>();
+    private CustomArrayRepository() {
+    }
+
+    public static CustomArrayRepository getInstance() {
+        return instance;
     }
 
     public List<CustomArray> getRepository() {
@@ -26,6 +33,7 @@ public class CustomArrayRepository implements Repository {
 
     @Override
     public void add(CustomArray array) {
+        addToWarehouse(array);
         repository.add(array);
     }
 
@@ -64,5 +72,21 @@ public class CustomArrayRepository implements Repository {
             }
         }
         return list;
+    }
+
+    public void sort(SortingService service) {
+        service.sorting(repository);
+    }
+
+    private void addToWarehouse(CustomArray array) {
+        Warehouse warehouse = Warehouse.getInstance();
+        CustomArrayService service = new CustomArrayService();
+        int[] resultArray = array.getArray();
+        int min = service.findMinElement(resultArray);
+        int max = service.findMaxElement(resultArray);
+        int average = service.findMeanOfArray(resultArray);
+        int sum = service.sumOfArray(resultArray);
+        ArrayValues arrayValues = new ArrayValues(min, max, average, sum);
+        warehouse.put(array.getId(), arrayValues);
     }
 }

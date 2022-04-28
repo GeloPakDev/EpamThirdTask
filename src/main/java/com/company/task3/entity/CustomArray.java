@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class CustomArray {
-    int id;
-    int[] array;
+    private int id;
+    private int[] array;
 
     public CustomArray(int id, int[] array) {
         this.id = id;
@@ -26,6 +26,14 @@ public class CustomArray {
 
     public void setArray(int[] array) {
         this.array = array;
+    }
+
+    public int getElement(int index) {
+        return array[index];
+    }
+
+    public void setElement(int index , int element) {
+        array[index] = element;
     }
 
     @Override

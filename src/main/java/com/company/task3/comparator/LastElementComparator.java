@@ -1,4 +1,4 @@
-package com.company.task3.comparators;
+package com.company.task3.comparator;
 
 import com.company.task3.entity.CustomArray;
 
