@@ -14,9 +14,9 @@ public class MaxArraySpecification implements Specification {
     }
 
     @Override
-    public boolean check(CustomArray array) {
+    public boolean specify(CustomArray array) {
         CustomArrayService service = new CustomArrayService();
-        int maxElement = service.findMaxElement(array.getArray());
+        int maxElement = service.findMaxElement(array);
         return from < maxElement && to > maxElement;
     }
 }

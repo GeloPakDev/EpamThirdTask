@@ -7,6 +7,6 @@ import java.util.Comparator;
 public class LastElementComparator implements Comparator<CustomArray> {
     @Override
     public int compare(CustomArray array1, CustomArray array2) {
-        return Integer.compare(array1.getArray()[array1.getArray().length], array2.getArray()[array2.getArray().length]);
+        return Integer.compare(array1.getArray()[array1.getArray().length - 1], array2.getArray()[array2.getArray().length - 1]);
     }
 }

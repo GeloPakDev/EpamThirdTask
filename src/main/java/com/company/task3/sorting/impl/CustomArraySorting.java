@@ -1,6 +1,6 @@
-package com.company.task3.action.impl;
+package com.company.task3.sorting.impl;
 
-import com.company.task3.action.ArraySorting;
+import com.company.task3.sorting.ArraySorting;
 
 public class CustomArraySorting implements ArraySorting {
 

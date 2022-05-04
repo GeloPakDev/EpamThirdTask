@@ -15,9 +15,9 @@ public class SizeArraySpecification implements Specification {
     }
 
     @Override
-    public boolean check(CustomArray array) {
+    public boolean specify(CustomArray array) {
         CustomArrayService service = new CustomArrayService();
-        int size = service.countElements(array.getArray());
+        int size = service.countElements(array);
         return from < size && to > size;
     }
 }

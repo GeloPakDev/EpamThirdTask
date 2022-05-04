@@ -1,11 +1,17 @@
 package com.company.task3.entity;
 
+import com.company.task3.exception.CustomArrayException;
+import com.company.task3.observer.ArrayObserver;
+import com.company.task3.observer.Observable;
+import com.company.task3.observer.impl.CustomArrayObserver;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-public class CustomArray {
+public class CustomArray implements Observable {
     private int id;
     private int[] array;
+    private ArrayObserver observer = new CustomArrayObserver();
 
     public CustomArray(int id, int[] array) {
         this.id = id;
@@ -16,7 +22,10 @@ public class CustomArray {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id) throws CustomArrayException {
+        if (id < 0) {
+            throw new CustomArrayException("Id cannot be negative");
+        }
         this.id = id;
     }
 
@@ -26,14 +35,22 @@ public class CustomArray {
 
     public void setArray(int[] array) {
         this.array = array;
+        notifyObservers();
     }
 
-    public int getElement(int index) {
+    public int getElement(int index) throws CustomArrayException {
+        if (index > array.length || index < 0) {
+            throw new CustomArrayException("Unable to get the element!");
+        }
         return array[index];
     }
 
-    public void setElement(int index , int element) {
+    public void setElement(int index, int element) throws CustomArrayException {
+        if (index > array.length || index < 0) {
+            throw new CustomArrayException("Unable to set up the element");
+        }
         array[index] = element;
+        notifyObservers();
     }
 
     @Override
@@ -60,5 +77,20 @@ public class CustomArray {
                 .add("id=" + id)
                 .add("array=" + Arrays.toString(array))
                 .toString();
+    }
+
+    @Override
+    public void attach(ArrayObserver observer) {
+        this.observer = observer;
+    }
+
+    @Override
+    public void detach(ArrayObserver observer) {
+        this.observer = null;
+    }
+
+    @Override
+    public void notifyObservers() {
+        observer.actionPerformed(this);
     }
 }

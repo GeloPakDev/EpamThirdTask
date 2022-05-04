@@ -1,7 +1,6 @@
 package com.company.task3.specification.impl;
 
 import com.company.task3.entity.CustomArray;
-import com.company.task3.exception.CustomArrayException;
 import com.company.task3.service.CustomArrayService;
 import com.company.task3.specification.Specification;
 
@@ -15,9 +14,9 @@ public class MinArraySpecification implements Specification {
     }
 
     @Override
-    public boolean check(CustomArray array) {
+    public boolean specify(CustomArray array) {
         CustomArrayService service = new CustomArrayService();
-        int min = service.findMinElement(array.getArray());
+        int min = service.findMinElement(array);
         return from < min && to > min;
     }
 }

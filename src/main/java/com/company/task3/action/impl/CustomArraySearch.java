@@ -1,6 +1,5 @@
 package com.company.task3.action.impl;
 
-
 import com.company.task3.action.ArraySearch;
 
 public class CustomArraySearch implements ArraySearch {

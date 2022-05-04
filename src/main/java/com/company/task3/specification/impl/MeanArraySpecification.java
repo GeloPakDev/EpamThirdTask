@@ -14,9 +14,9 @@ public class MeanArraySpecification implements Specification {
     }
 
     @Override
-    public boolean check(CustomArray array) {
+    public boolean specify(CustomArray array) {
         CustomArrayService service = new CustomArrayService();
-        int mean = service.findMeanOfArray(array.getArray());
+        int mean = service.findMeanOfArray(array);
         return from < mean && to > mean;
     }
 }

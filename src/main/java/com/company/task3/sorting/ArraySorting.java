@@ -1,4 +1,4 @@
-package com.company.task3.action;
+package com.company.task3.sorting;
 
 public interface ArraySorting {
     void mergeSort(int[] array, int start, int end);

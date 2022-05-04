@@ -14,7 +14,7 @@ import java.util.StringJoiner;
 
 public class CustomArrayRepository implements Repository {
     private static final CustomArrayRepository instance = new CustomArrayRepository();
-    private List<CustomArray> repository;
+    private List<CustomArray> repository = new ArrayList<>();
 
     private CustomArrayRepository() {
     }
@@ -64,16 +64,18 @@ public class CustomArrayRepository implements Repository {
                 .toString();
     }
 
-    public List<CustomArray> findBySpecification(Specification specification) {
+    @Override
+    public List<CustomArray> query(Specification specification) {
         List<CustomArray> list = new ArrayList<>();
         for (CustomArray array : repository) {
-            if (specification.check(array)) {
+            if (specification.specify(array)) {
                 list.add(array);
             }
         }
         return list;
     }
 
+    @Override
     public void sort(SortingService service) {
         service.sorting(repository);
     }
@@ -81,11 +83,10 @@ public class CustomArrayRepository implements Repository {
     private void addToWarehouse(CustomArray array) {
         Warehouse warehouse = Warehouse.getInstance();
         CustomArrayService service = new CustomArrayService();
-        int[] resultArray = array.getArray();
-        int min = service.findMinElement(resultArray);
-        int max = service.findMaxElement(resultArray);
-        int average = service.findMeanOfArray(resultArray);
-        int sum = service.sumOfArray(resultArray);
+        int min = service.findMinElement(array);
+        int max = service.findMaxElement(array);
+        int average = service.findMeanOfArray(array);
+        int sum = service.sumOfArray(array);
         ArrayValues arrayValues = new ArrayValues(min, max, average, sum);
         warehouse.put(array.getId(), arrayValues);
     }
